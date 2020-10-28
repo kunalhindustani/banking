@@ -1,8 +1,9 @@
 const { masterExecute } = require('./../config/connection');
 
+////This method insert and update the amount in the db.
 exports.transactionAmountModel  = function callTransferModel(req){
     return new promise(async (resolve, reject)=>{
-        let checkUserAmount = `select * from userDeatil where accountId = ?`;
+        
     });
 }
 

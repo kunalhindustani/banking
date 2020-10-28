@@ -14,7 +14,7 @@ exports.callTransferAmount = async function (req, res) {
             return sendWrongParamResponse(req, res, validationResult, null, null, 400);
         }
         let userAccountResult = await checkUserAccountAndBalanceModel(req.body);
-        let transactionResult = await transactionAmount(req.body);
+        let transactionResult = await transactionAmountModel(req.body);
         //let transactionResult = await callTransferModel(req);
     } catch(error) {
         console.log("the error is ", error);
