@@ -8,8 +8,6 @@ exports.callTransferAmount = async function (req, res) {
         console.log("call transfer function is ",commonCheck);
         let reqData = ["userName","fromAccountNumber","amountTransfer","toAccountNumber","fromAccountType"];
         let validationResult = await commonCheck(req, reqData, 'body');
-        //function (req, res, message, data, key, code)
-        console.log("tt778888 8899 554 455 ", validationResult);
         if (validationResult) {
             return sendWrongParamResponse(req, res, validationResult, null, null, 400);
         }
