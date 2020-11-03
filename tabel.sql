@@ -14,3 +14,11 @@ cust_account_status boolean,
 cust_balance varchar(10),
 UNIQUE(account_number,cust_account_type)
 );
+
+CREATE TABLE user_account_transaction_detail(tran_id int(20) NOT NULL,
+from_account_number varchar(40) NOT NULL UNIQUE,
+to_account_number varchar(40) NOT NULL UNIQUE,
+tran_amount varchar(20),
+tran_status boolean,
+tran_date default DATE.now
+);
