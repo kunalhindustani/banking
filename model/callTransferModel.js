@@ -8,8 +8,7 @@ exports.transactionAmountModel  = function callTransferModel(req, currentAmount)
         let result = await masterExecute(insertQuery, valueArray);
         let updateAmount = parseFloat(currentAmount) - parseFloat(req.amountTransfer);
         let updateQuery = `update user_account_type set cust_balance = ? where account_number = ?;`
-        let valueArray = [updateAmount,req.fromAccountNumber];
-        let result = await masterExecute(updateQuery, valueArray);
+        let valueArray1 = [updateAmount,req.fromAccountNumber];
     });
 }
 
@@ -23,11 +22,11 @@ exports.checkUserAccountAndBalanceModel = function(req) {
             where UI.account_number = ? and uat.cust_balance > ? and uat.cust_account_type = ?;
             update  set amount=`;
             let valueArray = [req.fromAccountNumber, req.amountTransfer, req.fromAccountType];
-            masterExecute(query, valueArray, (result) => {
+            masterExecute(query, valueArray, async (result) => {
                 if(result && result.length) {
-                    let updateAmount = parseFloat(result[0].cust_balance)- parseFloat(req.amountTransfer);
-                    let updateQuery = `update user_account_type set cust_balance = ? where account_number = ?;`
-                    let updateValueArray = [updateAmount,req.fromAccountNumber];
+                    let updateQuery = `update user_account_type set cust_balance = cust_balance - ${parseFloat(req.amountTransfer)} where account_number = ?;
+                    update user_account_type set cust_balance = cust_balance + ${parseFloat(req.amountTransfer)} where account_number = ?;`
+                    let updateValueArray = [req.fromAccountNumber, req.toAccountNumber];
                     let updateResult = await masterExecute(updateQuery, updateValueArray);
                     return resolve(updateResult);
                 }
