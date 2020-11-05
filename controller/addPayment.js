@@ -13,6 +13,7 @@ exports.callTransferAmount = async function (req, res) {
         }
         let userAccountResult = await checkUserAccountAndBalanceModel(req.body);
         let transactionResult = await transactionAmountModel(req.body, userAccountResult);
+        responseSuccess(req, res, "Transaction is successfully");
     } catch(error) {
         console.log("the error is ", error);
         responseError (req, res, error, null, "400");

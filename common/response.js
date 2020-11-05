@@ -1,3 +1,13 @@
+exports.responseSuccess  = function(req, res, msg, data, code) {
+  let responseObj = {
+    statusCode: code ? code : 200,
+    messgae: msg || "Data is fetch successfully",
+  };
+  responseObj['data'] = data || {};
+  res.send(responseObj);
+};
+
+
 exports.responseError  = function(req, res, error, data, code) {
     let responseObj = {
       statusCode: code ? code : 400,
